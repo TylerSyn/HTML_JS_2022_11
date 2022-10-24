@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 4 | Layout position, and semantic elements</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="container">
+        <!--All of our content will go here-->
+        <header>
+            <h1>Page 2 Week 4 Day 1 | CSS Position Layout Lab</h1>
+    
+        </header>
+        <nav>
+            <div class="buttons">
+                <a href="#" class="btn">Home</a>
+                 <a href="page2.html" class="btn">Page 2</a>
+                  <a href="../../html_java_fall_2022/index.html" class="btn">Main assignment page</a>
+            </div>
+            
+        </nav>
+        <section>
+            section
+            <span id="clicks"></span>
+            <button onclick="updateClicks()">Click this button</button>
+        </section>
+        <article>
+            article
+        </article>
+        <aside>
+            aside
+        </aside>
+        <footer>
+            footer
+        </footer>
+        <script>
+            var clicks = 0
+
+            function updateClicks() {
+                clicks += 1;
+                document.getElementById("clicks").innerHTML = clicks.toString();
+            }
+        </script>
+    </div>
+</body>
+
+</html>
