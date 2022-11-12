@@ -14,18 +14,21 @@ ctx.strokeText("Welcome to the RPS game!", 125, 280)
 var rps = ["rock", "paper", "scissors"];
 //console.log(rps[2])
 
-document.getElementById("rock").addEventListener('click', function (e) {
-    alert("You picked, " + rps[0]);
+document.getElementById("rock").addEventListener('click', function (e){
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillText("You picked, " + rps[0], 125, 200);
     playGame(rps[0]);
 });
 
 document.getElementById("paper").addEventListener('click', function (e) {
-    alert("You picked, " + rps[1]);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillText("You picked, " + rps[1], 125, 200);
     playGame(rps[1]);
 });
 
 document.getElementById("scissors").addEventListener('click', function (e) {
-    alert("You picked, " + rps[2]);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillText("You picked, " + rps[2], 125, 200);
     playGame(rps[2]);
 });
 
@@ -38,14 +41,14 @@ function playGame(playerChoice) {
         case "rock":
             if (cpuChoice == 0) {
                 //rock
-                alert("cpu chose rock, It's a tie")
+                ctx.fillText("cpu chose rock, It's a tie",250,350)
             }
             else if (cpuChoice == 1) {
                 //paper
-                alert("cpu chose paper, you lose")
+                ctx.fillText("cpu chose paper, you lose",250, 350)
             }
             else {
-                alert("cpu chose scissors, you win")
+                ctx.fillText("cpu chose scissors, you win", 250, 350)
                 }
                 break; 
     
@@ -56,14 +59,14 @@ function playGame(playerChoice) {
         case "paper":
             if (cpuChoice == 0) {
                 //rock
-                alert("cpu chose rock, you win")
+                ctx.fillText("cpu chose rock, you win",250,350)
             }
             else if (cpuChoice == 1) {
                 //paper
-                alert("cpu chose paper, its a tie")
+                ctx.fillText("cpu chose paper, its a tie",250,350)
             }
             else {
-                alert("cpu chose scissors, you lose")
+                ctx.fillText("cpu chose scissors, you lose",250,350)
             }
             break; 
     
@@ -74,14 +77,14 @@ function playGame(playerChoice) {
         case "scissors":
             if (cpuChoice == 0) {
                 //rock
-                alert("cpu chose rock, you lose")
+                ctx.fillText("cpu chose rock, you lose",250,350)
             }
             else if (cpuChoice == 1) {
                 //paper
-                alert("cpu chose paper, you win")
+                ctx.fillText("cpu chose paper, you win",250,350)
             }
             else {
-                alert("cpu chose scissors, its a tie")
+                ctx.fillText("cpu chose scissors, its a tie",250,350)
                  }
                 break; 
     
