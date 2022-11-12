@@ -5,16 +5,36 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik+Bubbles&display=swap" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Rubik+Bubbles&display=swap');
+    
+@font-face{
+    font-family: blackOps;
+    src: url(fonts/Call\ of\ Ops\ Duty.otf)
+}
+
+        body{
+           -webkit-text-stroke-width: 1px;
+           -webkit-text-stroke-color: orange;
+           font-family: blackOps;
+        }
+    </style>
 </head>
 <body>
     <ul>
         <li>
             <p>what is black and white and read all over</p>
             <br>
-            <p onclick="showAnswer('answer','a newspaper')" id="answer">answer</p>
+            <button onclick="showAnswer('answer','a newspaper')">click for answer</button>
+            <span id="answer"></span>
             <p>what gets bigger the more thats taken away</p>
             <br>
-            <p onclick="showAnswer('answer2','a hole')" id="answer2">answer</p>
+           
+            <button onclick="showAnswer('answer2','a hole')">click for answer</button>
+            <span id="answer2"></span>
         </li>
     </ul>
     <script src="riddles.js"></script>
