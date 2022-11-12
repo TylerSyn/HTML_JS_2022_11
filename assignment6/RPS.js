@@ -4,8 +4,8 @@ var ctx = canvas.getContext("2d")
 
 //drawing the fonts
 ctx.font = "40px ariel";
-ctx.fillStyle = "blue"
-ctx.strokeStyle = "green"
+ctx.fillStyle = "yellow"
+ctx.strokeStyle = "white"
 ctx.fillText("Welcome to the RPS game!", 125, 280)
 ctx.strokeText("Welcome to the RPS game!", 125, 280)
 
