@@ -1,7 +1,7 @@
 var canvas = document.querySelector('canvas')
 var ctx = canvas.getContext('2d')
 var timer = requestAnimationFrame(main)
-var speed = 5
+var speed = 1
 
 // random number function
 function randomRange(high, low){
