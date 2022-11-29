@@ -9,6 +9,15 @@ var hrock = new Image()
 var hpaper = new Image()
 var hscissors = new Image()
 
+var playerScore = 0
+function playerScoreMore (){
+playerScore += 1
+}
+var cpuScore = 0
+function cpuScoreMore(){
+cpuScore += 1
+}
+
 rock.src = "images/rock.jpg"
 paper.src = "images/paper.jpg"
 scissors.src = "images/scissors.jpg"
@@ -70,6 +79,7 @@ function draw(rock,paper,scissors,crock,cpaper,cscissors) {
         ctx.drawImage(cscissors, canvas.width/2 -scissors.width/2 + 100, 375)
 
         ctx.fillText(results, canvas.width/2,525)
+        ctx.fillText ("player score: "+playerScore + "CPU score: " + cpuScore, canvas.width/2,500)
         ctx.restore()
     }
 }
@@ -117,11 +127,13 @@ function playGame(playerChoice) {
                // alert("cpu chose paper, you lose")
                results ="cpu chose paper, you lose"
                 draw(hrock,paper,scissors,rock,hpaper,scissors)
+                cpuScoreMore()
             }
             else {
                 //alert("cpu chose scissors, you win")
                 results ="cpu chose scissors, you win"
                 draw(hrock,paper,scissors,rock,paper,hscissors)
+                playerScoreMore()
             }
             break;
 
@@ -135,6 +147,7 @@ function playGame(playerChoice) {
              //   alert("cpu chose rock, you win")
              results ="cpu chose rock, you win"
                 draw(rock,hpaper,scissors,hrock,paper,scissors)
+                playerScoreMore()
             }
             else if (cpuChoice == 1) {
                 //paper
@@ -146,6 +159,7 @@ function playGame(playerChoice) {
               //  alert("cpu chose scissors, you lose")
               results ="cpu chose scissors, you lose"
                 draw(rock,hpaper,scissors,rock,paper,hscissors)
+                cpuScoreMore()
             }
             break;
 
@@ -159,12 +173,14 @@ function playGame(playerChoice) {
               //  alert("cpu chose rock, you lose")
               results ="cpu chose rock, you lose"
                 draw(rock,paper,hscissors,hrock,paper,scissors)
+                cpuScoreMore()
             }
             else if (cpuChoice == 1) {
                 //paper
                // alert("cpu chose paper, you win")
                results ="cpu chose paper, you win"
                 draw(rock,paper,hscissors,rock,hpaper,scissors)
+                playerScoreMore()
             }
             else {
               //  alert("cpu chose scissors, its a tie")
