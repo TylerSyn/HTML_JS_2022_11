@@ -19,15 +19,15 @@ function cpuScoreMore(){
 cpuScore += 1
 }
 
-rock.src = "images/rock.jpg"
-paper.src = "images/paper.jpg"
-scissors.src = "images/scissors.jpg"
+rock.src = "images/Earth.png"
+paper.src = "images/fire.png"
+scissors.src = "images/windy.png"
 
 carl.src="images/carledWheezy.png"
 
-hrock.src = "images/rock2.jpg"
-hpaper.src = "images/paper2.jpg"
-hscissors.src = "images/scissors2.jpg"
+hrock.src = "images/EarthH.png"
+hpaper.src = "images/fireH.png"
+hscissors.src = "images/windyH.png"
 
 hscissors.onload = function(){
     draw(rock,paper,scissors,rock,paper,scissors)
@@ -38,7 +38,7 @@ document.addEventListener("keydown", onKeyDown)
 document.addEventListener("keyup", onkeyup)
 
 var gameOver = true;
-var results = "select ROCK, PAPER, SCISSORS above"
+var results = "select EARTH, WIND, or FIRE above"
 
 function onKeyDown(e) {
     console.log(e.keyCode);
@@ -60,9 +60,9 @@ function draw(rock,paper,scissors,crock,cpaper,cscissors) {
     ctx.fillStyle = "pink"
     ctx.strokeStyle = "pink"
     ctx.textAlign = "center"
-    ctx.fillText("Welcome to the RPS game!", canvas.width/2, 280)
+    ctx.fillText("Welcome to the EWF game!", canvas.width/2, 280)
     ctx.fillText("Press space to start", canvas.width/2, 320)
-    ctx.strokeText("Welcome to the RPS game!", canvas.width/2, 280)
+    ctx.strokeText("Welcome to the EWF game!", canvas.width/2, 280)
     }
     else{
 
