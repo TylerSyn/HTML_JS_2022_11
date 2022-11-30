@@ -8,6 +8,7 @@ var finish = 750
 var carPos = 2
 function randomRange(high, low){
     return Math.random() * (high - low) + low}
+    var carWidth=50
 
 
 var startFuel = randomNumber(canvas.width, 600)
@@ -18,6 +19,14 @@ var gameOver = true
 var seconds = 3
 var fps = 60
 var frames=fps
+
+//load game sprite
+var carSprite = new Image()
+carSprite.src = "images/carSprite.png"
+
+carSprite.onload = function(){
+    main()
+}
 
 
 //add some listeners
@@ -58,7 +67,7 @@ function main() {
 
         
         drawFuelBar()
-        if (carPos + 40 > finish || fuel<=0){
+        if (carPos + carWidth > finish || fuel<=0){
             drawResults()
         }
 
@@ -81,8 +90,9 @@ function main() {
 function drawCar() {
     
     //draw car
-    ctx.fillStyle = `rgb(${randomRange(255,0)},${randomRange(255,0)},${randomRange(255,0)})`
-    ctx.fillRect(carPos, canvas.height / 2, 40, 20)
+  //  ctx.fillStyle = `rgb(${randomRange(255,0)},${randomRange(255,0)},${randomRange(255,0)})`
+   // ctx.fillRect(carPos, canvas.height / 2, carWidth, 20)
+    ctx.drawImage(carSprite,carPos,canvas.height/2,carWidth,20)
 }
 
 function drawFuelBar() {
@@ -104,7 +114,7 @@ function drawFuelBar() {
     }
 }
 function drawResults(){
-    if(carPos +40 >finish){
+    if(carPos +carWidth >finish){
         ctx.fillStyle = "white"
         ctx.font = "25px ariel"
         ctx.textAlign = "center"
