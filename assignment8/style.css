@@ -1,0 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
+html,body{
+    display: flex;
+    justify-content: center;
+background-image: url("images/watermine.png");
+background-size: contain
+}
+canvas{border: 3px solid red;
+
+font-family: 'Open Sans', sans-serif;
+}
