@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
+html,body{
+    display: flex;
+    justify-content: center;
+    background-image: url(images/Starsinthesky.jpg);
+    background-size: cover;
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+
+}
+
+#container {
+
+ background-color: black;
+    width: 1000px;
+    height: 865px;
+}
+header {
+    padding: 1px;
+    width: 100%;
+    height: 60px;
+    background-color: blueviolet;
+}
+footer {
+    clear: both;
+    width: 100%;
+    height: 25px;
+    background-color: blueviolet;
+}
+#canvas{
+    border: 1px solid red;
+}
