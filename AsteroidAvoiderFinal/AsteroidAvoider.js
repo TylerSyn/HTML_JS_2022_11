@@ -10,8 +10,18 @@ var currentState = 0
 var score = 0
 var highScore = 0
 
+
 var shipSprite = new Image()
-shipSprite.src = "images/SHIP.png"
+shipSprite.src = "images/SHIPR.png"
+var asteroidSprite = new Image()
+asteroidSprite.src = "images/ast.png"
+var menu = new Image()
+menu.src = "images/menu.png"
+var end = new Image()
+end.src = "images/end.png"
+
+
+
 
 
 //utility functions
@@ -21,6 +31,9 @@ function randomRange(high, low){
 
 function gameStart(){
     //For Loop to create the instances of Asteroids
+   
+
+
     for(var i = 0; i < numAsteroids; i++){
         asteroids[i] = new Asteroid()
     }
@@ -31,19 +44,20 @@ function gameStart(){
 
 //Constructor Function for Asteroid Class
 function Asteroid(){
-    this.radius = randomRange(15,2)
-    this.x = randomRange(canvas.width - this.radius, this.radius)
-    this.y = randomRange(canvas.height - this.radius, this.radius) - canvas.height
-    this.vy = randomRange(10, 5)
+    this.radius = randomRange(15,5)
+    this.x = randomRange(canvas.width - this.radius, this.radius) + canvas.width
+    this.y = randomRange(canvas.height - this.radius, this.radius) 
+    this.vy = randomRange(5, 1)
     this.color = "white"
 
     this.drawAsteroid = function(){
         ctx.save()
-        ctx.beginPath()
-        ctx.fillStyle = this.color
-        ctx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI, true)
-        ctx.closePath()
-        ctx.fill()
+        // ctx.beginPath()
+        // ctx.fillStyle = this.color
+        // ctx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI, true)
+        // ctx.closePath()
+        // ctx.fill()
+        ctx.drawImage(asteroidSprite, this.x -20 , this.y - 20, this.radius * 4, this.radius * 4)
         ctx.restore()
 
     }
@@ -138,7 +152,7 @@ function PlayerShip(){
 
     this.drawShip = function(){
        ctx.save()
-       ctx.drawImage(shipSprite,this.x,this.y)
+       ctx.drawImage(shipSprite,this.x - 20,this.y - 20)
         ctx.translate(this.x, this.y)
         if(this.up || this.left || this.right){
             ctx.save()
@@ -152,24 +166,25 @@ function PlayerShip(){
                 ctx.fillStyle = "orange"
             }
           
-            // ctx.beginPath()
-            // ctx.moveTo(0, this.flamelength)
-            // ctx.lineTo(5,5)
-            // ctx.lineTo(-5,5)
-            // ctx.lineTo(0,this.flamelength)
-            // ctx.closePath()
-            // ctx.fill()
-            // ctx.restore()
+             ctx.beginPath()
+             ctx.moveTo(5, this.flamelength+ 10)
+             ctx.lineTo(-10,10)
+            // ctx.lineTo(-100,-500)
+             ctx.lineTo(5,this.flamelength + 10)
+             ctx.lineTo(5,this.flamelength -10)
+             ctx.closePath()
+             ctx.fill()
+             ctx.restore()
 
         }
-        ctx.fillStyle = "red"
-        ctx.beginPath()
-        ctx.moveTo(0, -10)
-        ctx.lineTo(10, 10)
-        ctx.lineTo(-10, 10)
-        ctx.lineTo(0, -10)
-        ctx.closePath()
-        ctx.fill();
+        // ctx.fillStyle = "red"
+        // ctx.beginPath()
+        // ctx.moveTo(0, -10)
+        // ctx.lineTo(10, 10)
+        // ctx.lineTo(-10, 10)
+        // ctx.lineTo(0, -10)
+        // ctx.closePath()
+        // ctx.fill();
         ctx.restore() 
     }
 
@@ -178,24 +193,24 @@ function PlayerShip(){
         this.y += this.vy
 
         //bottom boundary of screen
-        if(this.y > canvas.height - this.h/2){
-            this.y = canvas.height - this.h/2
+        if(this.y > canvas.height - this.h/2 - 7){
+            this.y = canvas.height - this.h/2 - 7
             this.vy = 0
         }
         //top boundary of screen
-        if(this.y < this.h/2){
-            this.y = this.h/2
+        if(this.y < this.h/2 + 7){
+            this.y = this.h/2 + 7
             this.vy = 0
         }
 
         //right boundary of screen
-        if(this.x > canvas.width - this.w/2){
-            this.x = canvas.width - this.w/2
+        if(this.x > canvas.width - this.w/2 - 7){
+            this.x = canvas.width - this.w/2 - 7
             this.vx = 0
         }
         //left boundary of screen
-        if(this.x < this.w/2){
-            this.x = this.w/2
+        if(this.x < this.w/2 + 7){
+            this.x = this.w/2 + 7
             this.vx = 0
         }
     }
@@ -204,13 +219,15 @@ function PlayerShip(){
 
 //Main Screen
 gameStates[0] = function(){
-    ctx.save()
+   ctx.save()
+
     ctx.font = "30px Arial"
     ctx.fillStyle = "white"
     ctx.textAlign = "center"
     ctx.fillText("Asteroid Avoider", canvas.width/2, canvas.height/2-30)
     ctx.font = "15px Arial"
     ctx.fillText("Press Space to Start", canvas.width/2, canvas.height/2 + 20)
+    ctx.drawImage(menu,0,0,canvas.width,canvas.height,0,0,canvas.width,canvas.height)
     ctx.restore()
 
 }
@@ -227,6 +244,8 @@ gameStates[1] = function(){
     //Vertical 
     if(ship.up){
         ship.vy = -10
+    }else if(ship.down){
+    ship.vy = 10
     }else{
         ship.vy = 3
     }
@@ -255,12 +274,12 @@ gameStates[1] = function(){
         }
 
 
-        if(asteroids[i].y > canvas.height + asteroids[i].radius){
-            asteroids[i].x = randomRange(canvas.width - asteroids[i].radius, asteroids[i].radius)
-            asteroids[i].y = randomRange(canvas.height - asteroids[i].radius, asteroids[i].radius) -  canvas.height
+        if(asteroids[i].x < canvas.width-canvas.width + asteroids[i].radius){
+            asteroids[i].x = randomRange(canvas.width - asteroids[i].radius, asteroids[i].radius) + canvas.width 
+            asteroids[i].y = randomRange(canvas.height - asteroids[i].radius, asteroids[i].radius) 
         }
         if(!gameOver){
-            asteroids[i].y += asteroids[i].vy
+            asteroids[i].x += -asteroids[i].vy
             asteroids[i].drawAsteroid()
         }
     }
@@ -280,6 +299,7 @@ gameStates[2] = function(){
         //set a new high score
         highScore = score
         ctx.save()
+        ctx.drawImage(end,0,0,canvas.width,canvas.height,0,0,canvas.width,canvas.height)
         ctx.font = "30px Arial"
         ctx.fillStyle = "white"
         ctx.textAlign = "center"
@@ -293,6 +313,7 @@ gameStates[2] = function(){
     }else{
         //keep same score new high score
         ctx.save()
+        ctx.drawImage(end,0,0,canvas.width,canvas.height,0,0,canvas.width,canvas.height)
         ctx.font = "30px Arial"
         ctx.fillStyle = "white"
         ctx.textAlign = "center"
@@ -300,6 +321,7 @@ gameStates[2] = function(){
         ctx.fillText("Your high score is: " + highScore.toString() , canvas.width/2, canvas.height/2-30)
         ctx.font = "15px Arial"
         ctx.fillText("Press Space to Play Again", canvas.width/2, canvas.height/2 + 20)
+        
         ctx.restore()
     }
     
