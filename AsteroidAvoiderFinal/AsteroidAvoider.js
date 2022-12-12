@@ -21,7 +21,9 @@ var end = new Image()
 end.src = "images/end.png"
 
 
-
+menu.onload = function(){
+    main();
+}
 
 
 //utility functions
@@ -51,13 +53,13 @@ function Asteroid(){
     this.color = "white"
 
     this.drawAsteroid = function(){
-        ctx.save()
+        // ctx.save()
         // ctx.beginPath()
         // ctx.fillStyle = this.color
         // ctx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI, true)
         // ctx.closePath()
         // ctx.fill()
-        ctx.drawImage(asteroidSprite, this.x -20 , this.y - 20, this.radius * 4, this.radius * 4)
+        ctx.drawImage(asteroidSprite, this.x - this.radius , this.y - this.radius, this.radius + this.radius, this.radius + this.radius)
         ctx.restore()
 
     }
@@ -148,14 +150,15 @@ function PlayerShip(){
     this.down = false
     this.left = false
     this.right = false
-    this.flamelength = 30
+    this.flamelength = -30
 
     this.drawShip = function(){
        ctx.save()
-       ctx.drawImage(shipSprite,this.x - 20,this.y - 20)
-        ctx.translate(this.x, this.y)
-        if(this.up || this.left || this.right){
+      
+    
+        if(this.up || this.down || this.right){
             ctx.save()
+            ctx.translate(this.x, this.y)
             //Changes the drawing values to animate the flame
             if(this.flamelength == 30){
                 this.flamelength = 20
@@ -167,16 +170,17 @@ function PlayerShip(){
             }
           
              ctx.beginPath()
-             ctx.moveTo(5, this.flamelength+ 10)
-             ctx.lineTo(-10,10)
-            // ctx.lineTo(-100,-500)
-             ctx.lineTo(5,this.flamelength + 10)
-             ctx.lineTo(5,this.flamelength -10)
+             ctx.moveTo(-this.flamelength +25 , -8)
+             ctx.lineTo(-this.flamelength - 10 , 5 )
+             ctx.lineTo(0,10)
+             //ctx.lineTo(-10,10)
+             ctx.lineTo(-this.flamelength + 25, -6)
              ctx.closePath()
              ctx.fill()
              ctx.restore()
 
-        }
+        } ctx.drawImage(shipSprite,this.x - 20,this.y - 20) 
+           ctx.translate(this.x, this.y)
         // ctx.fillStyle = "red"
         // ctx.beginPath()
         // ctx.moveTo(0, -10)
@@ -221,12 +225,12 @@ function PlayerShip(){
 gameStates[0] = function(){
    ctx.save()
 
-    ctx.font = "30px Arial"
-    ctx.fillStyle = "white"
-    ctx.textAlign = "center"
-    ctx.fillText("Asteroid Avoider", canvas.width/2, canvas.height/2-30)
-    ctx.font = "15px Arial"
-    ctx.fillText("Press Space to Start", canvas.width/2, canvas.height/2 + 20)
+    // ctx.font = "30px Arial"
+    // ctx.fillStyle = "white"
+    // ctx.textAlign = "center"
+    // ctx.fillText("Asteroid Avoider", canvas.width/2, canvas.height/2-30)
+    // ctx.font = "15px Arial"
+    // ctx.fillText("Press Space to Start", canvas.width/2, canvas.height/2 + 20)
     ctx.drawImage(menu,0,0,canvas.width,canvas.height,0,0,canvas.width,canvas.height)
     ctx.restore()
 
@@ -247,16 +251,16 @@ gameStates[1] = function(){
     }else if(ship.down){
     ship.vy = 10
     }else{
-        ship.vy = 3
+        ship.vy = 0
     }
     
     //Horizontal Movement
     if(ship.left){
-        ship.vx = -3
+        ship.vx = -10
     }else if(ship.right){
-        ship.vx = 3
+        ship.vx = 10
     }else{
-        ship.vx = 0
+        ship.vx = -3
     }
 
     //Loops through all asteroids and can check their position
@@ -274,8 +278,8 @@ gameStates[1] = function(){
         }
 
 
-        if(asteroids[i].x < canvas.width-canvas.width + asteroids[i].radius){
-            asteroids[i].x = randomRange(canvas.width - asteroids[i].radius, asteroids[i].radius) + canvas.width 
+        if(asteroids[i].x < canvas.width-canvas.width + asteroids[i].radius - 8){
+            asteroids[i].x = randomRange(canvas.width - asteroids[i].radius, asteroids[i].radius) + canvas.width + 5
             asteroids[i].y = randomRange(canvas.height - asteroids[i].radius, asteroids[i].radius) 
         }
         if(!gameOver){
